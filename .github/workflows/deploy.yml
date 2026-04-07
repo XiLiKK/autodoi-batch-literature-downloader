@@ -1,0 +1,46 @@
+name: Auto Download Papers
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'input/papers.csv'
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '0 2 * * *' # 可选：每天凌晨2点定时运行
+
+jobs:
+  download_papers:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        playwright install chromium
+
+    - name: Run Paper Downloader
+      env:
+        # 参考 .env.example，请在 Github Repository -> Settings -> Secrets and variables -> Actions 中配置此 Secret
+        PAPER_DOWNLOADER_EMAIL: ${{ secrets.PAPER_DOWNLOADER_EMAIL }}
+      run: |
+        # 以非交互模式运行批量下载（根据你的 cli 实际逻辑可能需要调整参数）
+        # 这里默认运行模式 3: 自动下载
+        echo "3" | python -m paper_downloader || true
+
+    - name: Upload Downloaded PDFs as Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Downloaded-Papers
+        path: output/downloads/
+        retention-days: 7

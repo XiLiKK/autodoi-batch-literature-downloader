@@ -1,0 +1,51 @@
+# DOI 批量文献下载工具 — 配置文件
+
+# API 配置
+api:
+  # Crossref / Unpaywall 需要邮箱进入 polite pool
+  # 请替换成你自己的邮箱
+  email: "your_email@example.com"
+  
+  # Crossref API 并发数 (polite pool 限制 10 req/s, 5 并发)
+  crossref_concurrency: 5
+  # 请求超时 (秒)
+  request_timeout: 30
+  # 最大重试次数
+  max_retries: 3
+
+# 下载配置  
+download:
+  # PDF 下载目录 (相对于项目根目录)
+  output_dir: "output/downloads"
+  # 浏览器页面加载超时 (秒)
+  page_timeout: 60
+  # 下载等待超时 (秒)
+  download_timeout: 120
+  # 下载间隔 (秒), 避免触发反爬
+  delay_between_downloads: 3
+  # 是否使用 headless 浏览器
+  headless: false
+  # 是否开启 Sci-Hub 作为兜底下载策略
+  use_scihub_fallback: true
+  # Sci-Hub 备用域名列表 (按序轮询)
+  scihub_mirrors:
+    - "https://sci-hub.se"
+    - "https://sci-hub.ru"
+    - "https://sci-hub.st"
+
+# 文件命名
+naming:
+  # 题目最大字符数
+  max_title_length: 80
+
+# 数据库
+database:
+  # SQLite 数据库路径 (相对于项目根目录)
+  path: "state/library.db"
+
+# 日志
+logging:
+  # 日志等级: DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
+  # 运行日志输出目录
+  output_dir: "output"
