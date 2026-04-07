@@ -1,4 +1,27 @@
+# Environments
 .env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Output and state
 output/
 state/
-__pycache__/
+
+# IDEs and Tools
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Tmp debug files
+tmp_*.py
