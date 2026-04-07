@@ -55,7 +55,7 @@ DOI
 ### 1. 自动轰炸下载（最常用！）
 这是你每天用得最多的一句：
 ```bash
-3
+python -m paper_downloader run
 ```
 当你敲下回车，就可以端起咖啡离开了。它会自动经历重重关卡，并把 PDF 塞进 `output/downloads` 文件夹里。
 
